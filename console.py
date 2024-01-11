@@ -44,7 +44,10 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
             else:
                 try:
-                    eval(args[0])()
+                    new_instance = BaseModel()
+                    print("[{}] ({}) {}".format(
+                        new_instance.__class__.__name__, new_instance.id,
+                        new_instance.__dict__))
                 except NameError:
                     print("** no instance found **")
 
