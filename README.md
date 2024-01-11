@@ -6,20 +6,21 @@
 
 - The goal of the project is to deploy on your server a simple copy of the AirBnB website.
 - Complete web application composed by:
-	1. A command interpreter to manipulate data without a visual interface, like in a Shell (perfect for 			development and debugging)
-	2. A website (the front-end) that shows the final product to everybody: static and dynamic
-	3. A database or files that store data (data = objects)
-	4. An API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
-	
+  1. A command interpreter to manipulate data without a visual interface, like in a Shell (perfect for development and debugging)
+  2. A website (the front-end) that shows the final product to everybody: static and dynamic
+  3. A database or files that store data (data = objects)
+  4. An API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
+
 ## Concepts tested
+
 1. Unittest
 2. Python packages
 3. *args, **kwargs
 4. datetime
 5. More
 
-
 ## The console
+
 - create your data model
 - manage (create, update, destroy, etc) objects via a console / command interpreter
 - store and persist objects to a file (JSON file)
@@ -29,4 +30,17 @@
 - This abstraction will also allow you to change the type of storage easily without updating all of your codebase.
 
 - The console will be a tool to validate this storage engine
+  
   ![815046647d23428a14ca](https://github.com/waltertaya/AirBnB_clone/assets/126944679/617ae889-b594-4dec-b6af-21289e32e20b)
+  
+## Web static
+
+## MySQL storage
+
+## Web framework - templating
+
+## RESTful API
+
+## Web dynamic
+
+## Files and Directories
