@@ -44,4 +44,5 @@
 ## Web dynamic
 
 ## Files and Directories
+
 ![d2d06462824fab5846f3](https://github.com/waltertaya/AirBnB_clone/assets/126944679/27892e20-7fc1-4714-a50e-4239e09b5ab7)
