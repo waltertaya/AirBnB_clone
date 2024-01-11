@@ -29,3 +29,4 @@
 - This abstraction will also allow you to change the type of storage easily without updating all of your codebase.
 
 - The console will be a tool to validate this storage engine
+  ![815046647d23428a14ca](https://github.com/waltertaya/AirBnB_clone/assets/126944679/617ae889-b594-4dec-b6af-21289e32e20b)
