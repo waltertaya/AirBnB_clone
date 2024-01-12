@@ -46,7 +46,11 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             else:
                 try:
-                    print(storage.all()[args[0] + "." + args[1]])
+                    instance_id = args[0] + "." + args[1]
+                    if instance_id not in storage.all():
+                        print("** no instance found **")
+                        return
+                    print(storage.all()[instance_id])
                 except NameError:
                     print("** no instance found **")
 
@@ -62,8 +66,12 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
             else:
                 try:
-                    new_instance = storage.all()
-                    del new_instance
+                    instance_id = args[0] + "." + args[1]
+                    if instance_id not in storage.all():
+                        print("** no instance found **")
+                        return
+
+                    del storage.all()[instance_id]
                     storage.save()
                 except NameError:
                     print("** no instance found **")
