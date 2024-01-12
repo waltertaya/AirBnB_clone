@@ -28,10 +28,13 @@ class FileStorage:
         """Deserializes the JSON file to __objects"""
         try:
             from models.base_model import BaseModel
+            from models.user import User
+            classes = {"BaseModel": BaseModel, "User": User}
+            
             with open(self.__file_path, "r") as f:
                 obj_dict = json.load(f)
                 for key, value in obj_dict.items():
-                    obj = BaseModel[value["__class__"]](**value)
+                    obj = classes[value["__class__"]](**value)
                     self.all()[key] = obj
         except FileNotFoundError:
             pass

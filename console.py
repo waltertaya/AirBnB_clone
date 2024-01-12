@@ -36,7 +36,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             try:
-                new_instance = BaseModel()
+                new_instance = arg()
                 storage.save()
                 print(new_instance.id)
             except NameError:
@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] not in ["BaseModel"]:
+            if args[0] not in ["BaseModel", "User"]:
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
@@ -81,7 +81,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] not in ["BaseModel"]:
+            if args[0] not in ["BaseModel", "User"]:
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
@@ -108,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] not in ["BaseModel"]:
+            if args[0] not in ["BaseModel", "User"]:
                 print("** class doesn't exist **")
             else:
                 try:
@@ -132,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] not in ["BaseModel"]:
+            if args[0] not in ["BaseModel", "User"]:
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
