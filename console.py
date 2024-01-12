@@ -42,12 +42,11 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
+            elif args[0] + "." + args[1] not in storage.all():
+                print("** no instance found **")
             else:
                 try:
-                    new_instance = BaseModel()
-                    print("[{}] ({}) {}".format(
-                        new_instance.__class__.__name__, new_instance.id,
-                        new_instance.__dict__))
+                    print(storage.all()[args[0] + "." + args[1]])
                 except NameError:
                     print("** no instance found **")
 
@@ -63,7 +62,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
             else:
                 try:
-                    eval(args[0])()
+                    new_instance = storage.all()
+                    del new_instance
+                    storage.save()
                 except NameError:
                     print("** no instance found **")
 
@@ -78,7 +79,11 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             else:
                 try:
-                    eval(args[0])()
+                    my_list = []
+                    new_instance = storage.all()
+                    for k, v in new_instance.items():
+                        my_list.append(str(storage.all()[k]))
+                    print(my_list)
                 except NameError:
                     print("** no instance found **")
 
@@ -93,9 +98,20 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
+            elif len(args) == 2:
+                print("** attribute name missing **")
+            elif len(args) == 3:
+                print("** value missing **")
             else:
                 try:
-                    eval(args[0])()
+                    instance_id = args[0] + "." + args[1]
+                    if instance_id not in storage.all():
+                        print("** no instance found **")
+                        return
+
+                    updated_instance = storage.all()[instance_id]
+                    setattr(updated_instance, args[2], args[3])
+                    storage.save()
                 except NameError:
                     print("** no instance found **")
 
