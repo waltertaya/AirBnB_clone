@@ -158,6 +158,28 @@ class HBNBCommand(cmd.Cmd):
         print("Updates an instance based on the class name and id by adding "
               "or updating attribute\n")
 
+    # overwrite default method
+    def onecmd(self, line):
+        """Method called on an input line"""
+        if line.endswith('.all()'):
+            command = line.rsplit('.all()', 1)[0].strip()
+
+            return self.do_allclass(command)
+        else:
+            return super().onecmd(line)
+
+    def do_allclass(self, line):
+        """"Retrieve all instances of a class using <class name>.all()"""
+        try:
+            my_list = []
+            new_instance = storage.all()
+            for k, v in new_instance.items():
+                if line == v.__class__.__name__:
+                    my_list.append(str(storage.all()[k]))
+            print(my_list)
+        except NameError:
+            print("** class doesn't exist **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
