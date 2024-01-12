@@ -54,7 +54,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] not in ["BaseModel", "User", "Amenity", "City","Place","Review","State"]:
+            if args[0] not in ["BaseModel", "User",
+                               "Amenity", "City", "Place", "Review", "State"]:
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
@@ -81,7 +82,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] not in ["BaseModel", "User", "Amenity", "City","Place","Review","State"]:
+            if args[0] not in ["BaseModel", "User",
+                               "Amenity", "City", "Place", "Review", "State"]:
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
@@ -108,7 +110,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] not in ["BaseModel", "User", "Amenity", "City","Place","Review","State"]:
+            if args[0] not in ["BaseModel", "User",
+                               "Amenity", "City", "Place", "Review", "State"]:
                 print("** class doesn't exist **")
             else:
                 try:
@@ -132,7 +135,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] not in ["BaseModel", "User", "Amenity", "City","Place","Review","State"]:
+            if args[0] not in ["BaseModel", "User",
+                               "Amenity", "City", "Place", "Review", "State"]:
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
@@ -165,6 +169,11 @@ class HBNBCommand(cmd.Cmd):
             command = line.rsplit('.all()', 1)[0].strip()
 
             return self.do_allclass(command)
+
+        elif line.endswith('.count()'):
+            command = line.rsplit('.count()', 1)[0].strip()
+
+            return self.do_count(command)
         else:
             return super().onecmd(line)
 
@@ -177,6 +186,18 @@ class HBNBCommand(cmd.Cmd):
                 if line == v.__class__.__name__:
                     my_list.append(str(storage.all()[k]))
             print(my_list)
+        except NameError:
+            print("** class doesn't exist **")
+
+    def do_count(self, line):
+        """Count all instances of a class using <class name>.count()"""
+        try:
+            my_list = []
+            new_instance = storage.all()
+            for k, v in new_instance.items():
+                if line == v.__class__.__name__:
+                    my_list.append(str(storage.all()[k]))
+            print(len(my_list))
         except NameError:
             print("** class doesn't exist **")
 
