@@ -174,6 +174,15 @@ class HBNBCommand(cmd.Cmd):
             command = line.rsplit('.count()', 1)[0].strip()
 
             return self.do_count(command)
+
+        elif line.endswith('.count()'):
+            command = line.rsplit('.count()', 1)[0].strip()
+
+            return self.do_count(command)
+
+        elif '.show' in line:
+            return self.do_shows(line)
+
         else:
             return super().onecmd(line)
 
@@ -200,6 +209,38 @@ class HBNBCommand(cmd.Cmd):
             print(len(my_list))
         except NameError:
             print("** class doesn't exist **")
+
+    def do_shows(self, line):
+        """Prints the string representation of an instance based on the class
+        name and id"""
+        try:
+            if line in ["BaseModel.show()", "User.show()","Amenity.show()",
+                        "City.show()", "Place.show()", "Review.show()",
+                        "State.show()", "BaseModel.show", "User.show",
+                        "Amenity.show", "City.show", "Place.show", "Review.show",
+                        "State.show", "BaseModel.show(", "User.show(","Amenity.show(",
+                        "City.show(", "Place.show(", "Review.show(",
+                        "State.show("]:
+                print("** class id missing **")
+                return
+            args = line.split('.')
+            
+            if args[0] not in ["BaseModel", "User",
+                               "Amenity", "City", "Place", "Review", "State"]:
+                print("** class doesn't exist **")
+                return
+            
+            temp = args[1].split('"')[1]
+            args[1] = temp
+            
+            instance_id = args[0] + "." + args[1]
+            if instance_id not in storage.all():
+                    print("** no instance found **")
+                    return
+            print(storage.all()[instance_id])
+        except NameError:
+            print("** no instance found **")
+
 
 
 if __name__ == '__main__':
