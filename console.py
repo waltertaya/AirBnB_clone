@@ -1,4 +1,5 @@
 import cmd
+import re
 from models.base_model import BaseModel
 from models.__init__ import storage
 
@@ -162,86 +163,60 @@ class HBNBCommand(cmd.Cmd):
         print("Updates an instance based on the class name and id by adding "
               "or updating attribute\n")
 
-    # overwrite default method
-    def onecmd(self, line):
-        """Method called on an input line"""
-        if line.endswith('.all()'):
-            command = line.rsplit('.all()', 1)[0].strip()
-
-            return self.do_allclass(command)
-
-        elif line.endswith('.count()'):
-            command = line.rsplit('.count()', 1)[0].strip()
-
-            return self.do_count(command)
-
-        elif line.endswith('.count()'):
-            command = line.rsplit('.count()', 1)[0].strip()
-
-            return self.do_count(command)
-
-        elif '.show' in line:
-            return self.do_shows(line)
-
-        else:
-            return super().onecmd(line)
-
-    def do_allclass(self, line):
-        """"Retrieve all instances of a class using <class name>.all()"""
-        try:
-            my_list = []
-            new_instance = storage.all()
-            for k, v in new_instance.items():
-                if line == v.__class__.__name__:
-                    my_list.append(str(storage.all()[k]))
-            print(my_list)
-        except NameError:
-            print("** class doesn't exist **")
-
-    def do_count(self, line):
-        """Count all instances of a class using <class name>.count()"""
-        try:
-            my_list = []
-            new_instance = storage.all()
-            for k, v in new_instance.items():
-                if line == v.__class__.__name__:
-                    my_list.append(str(storage.all()[k]))
-            print(len(my_list))
-        except NameError:
-            print("** class doesn't exist **")
-
-    def do_shows(self, line):
-        """Prints the string representation of an instance based on the class
-        name and id"""
-        try:
-            if line in ["BaseModel.show()", "User.show()","Amenity.show()",
-                        "City.show()", "Place.show()", "Review.show()",
-                        "State.show()", "BaseModel.show", "User.show",
-                        "Amenity.show", "City.show", "Place.show", "Review.show",
-                        "State.show", "BaseModel.show(", "User.show(","Amenity.show(",
-                        "City.show(", "Place.show(", "Review.show(",
-                        "State.show("]:
-                print("** class id missing **")
-                return
-            args = line.split('.')
-            
+    def default(self, arg):
+        """Method called on an input line when the command prefix is not
+        recognized"""
+        args = arg.split(".")
+        if len(args) == 2:
             if args[0] not in ["BaseModel", "User",
                                "Amenity", "City", "Place", "Review", "State"]:
                 print("** class doesn't exist **")
                 return
-            
-            temp = args[1].split('"')[1]
-            args[1] = temp
-            
-            instance_id = args[0] + "." + args[1]
-            if instance_id not in storage.all():
-                    print("** no instance found **")
-                    return
-            print(storage.all()[instance_id])
-        except NameError:
-            print("** no instance found **")
+            if args[1] == "all()":
+                self.do_all(args[0])
+            elif args[1] == "count()":
+                count = 0
+                for k, v in storage.all().items():
+                    if args[0] in k:
+                        count += 1
+                print(count)
+            elif "show(" in args[1]:
+                match = re.search(r'\((.*?)\)', args[1])
+                if match:
+                    instance_id = match.group(1).strip('\'"')
+                    if args[0] not in ["BaseModel", "User", "Amenity", "City", "Place", "Review", "State"]:
+                        print("** class doesn't exist **")
+                    else:
+                        self.do_show(args[0] + " " + instance_id)
+                else:
+                    print("** invalid command format **")
 
+            elif "destroy(" in args[1]:
+                match = re.search(r'\((.*?)\)', args[1])
+                if match:
+                    instance_id = match.group(1).strip('\'"')
+                    if args[0] not in ["BaseModel", "User", "Amenity", "City", "Place", "Review", "State"]:
+                        print("** class doesn't exist **")
+                    else:
+                        self.do_destroy(args[0] + " " + instance_id)
+                else:
+                    print("** invalid command format **")
 
+            elif "update(" in args[1]:
+                new_instance = re.search(r'\((.*?)\)', args[1]).group(1)
+                args[1] = args[1].split(",")
+                instance_id = new_instance.split(",")[0].strip('\'"')
+                key = new_instance.split(", ")[1].strip('\'"')
+                value = new_instance.split(", ")[2].strip('\'"')
+                if key == None:
+                    print("** attribute name missing **")
+                elif value == None:
+                    print("** value missing **")
+                else:
+                    self.do_update(args[0] + " " + instance_id + " " +
+                                   key + " " + value)
+        else:
+            print("*** Unknown syntax:", arg)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
