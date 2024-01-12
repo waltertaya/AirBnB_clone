@@ -203,18 +203,48 @@ class HBNBCommand(cmd.Cmd):
                     print("** invalid command format **")
 
             elif "update(" in args[1]:
-                new_instance = re.search(r'\((.*?)\)', args[1]).group(1)
-                args[1] = args[1].split(",")
-                instance_id = new_instance.split(",")[0].strip('\'"')
-                key = new_instance.split(", ")[1].strip('\'"')
-                value = new_instance.split(", ")[2].strip('\'"')
-                if key == None:
-                    print("** attribute name missing **")
-                elif value == None:
-                    print("** value missing **")
+                if "{" in args[1]:
+                    new_instance = re.search(r'\((.*?)\)', args[1]).group(1)
+
+                    data = [
+                        new_instance
+                    ]
+
+                    cleaned_data = []
+
+                    for item in data:
+                        if isinstance(item, str):
+                            cleaned_item = re.sub(r'[^a-zA-Z0-9\s]', '', item)
+                            cleaned_data.append(cleaned_item)
+                        else:
+                            cleaned_data.append(item)
+                    
+                    my_list = cleaned_data[0].split(" ")
+                    instance_id = my_list.pop(0)
+                    my_dict = {}
+                    for i in range(0, len(my_list), 2):
+                        my_dict[my_list[i]] = my_list[i + 1]
+                    for k, v in my_dict.items():
+                        self.do_update(args[0] + " " + instance_id + " " + k + " " + v)
+
                 else:
-                    self.do_update(args[0] + " " + instance_id + " " +
-                                   key + " " + value)
+                    new_instance = re.search(r'\((.*?)\)', args[1]).group(1)
+
+                    data = [
+                        new_instance
+                    ]
+
+                    cleaned_data = []
+
+                    for item in data:
+                        if isinstance(item, str):
+                            cleaned_item = re.sub(r'[^a-zA-Z0-9\s]', '', item)
+                            cleaned_data.append(cleaned_item)
+                        else:
+                            cleaned_data.append(item)
+
+                    print(args[0] + " " + cleaned_data[0])
+                    self.do_update(args[0] + " " + cleaned_data[0])
         else:
             print("*** Unknown syntax:", arg)
 
