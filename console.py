@@ -14,9 +14,20 @@ class HBNBCommand(cmd.Cmd):
     # aliasing
     do_EOF = do_quit
 
+    # help quit
+    def help_quit(self):
+        print("Quit command to exit the program\n")
+
+    def help_EOF(self):
+        print("Quit command to exit the program\n")
+
     def emptyline(self):
         """Empty line + ENTER shouldn’t execute anything"""
         pass
+
+    # help emptyline
+    def help_emptyline(self):
+        print("Empty line + ENTER shouldn’t execute anything\n")
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it (to the JSON file)
@@ -30,6 +41,11 @@ class HBNBCommand(cmd.Cmd):
                 print(new_instance.id)
             except NameError:
                 print("** class doesn't exist **")
+
+    # help create
+    def help_create(self):
+        print("Creates a new instance of BaseModel, saves it (to the JSON "
+              "file) and prints the id\n")
 
     def do_show(self, arg):
         """Prints the string representation of an instance based on the class
@@ -54,6 +70,11 @@ class HBNBCommand(cmd.Cmd):
                 except NameError:
                     print("** no instance found **")
 
+    # help show
+    def help_show(self):
+        print("Prints the string representation of an instance based on the "
+              "class name and id\n")
+
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
         if not arg:
@@ -76,6 +97,10 @@ class HBNBCommand(cmd.Cmd):
                 except NameError:
                     print("** no instance found **")
 
+    # help destroy
+    def help_destroy(self):
+        print("Deletes an instance based on the class name and id\n")
+
     def do_all(self, arg):
         """Prints all string representation of all instances based or not on
         the class name"""
@@ -94,6 +119,11 @@ class HBNBCommand(cmd.Cmd):
                     print(my_list)
                 except NameError:
                     print("** no instance found **")
+
+    # help all
+    def help_all(self):
+        print("Prints all string representation of all instances based or not "
+              "on the class name\n")
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id by adding or
@@ -122,6 +152,11 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
                 except NameError:
                     print("** no instance found **")
+
+    # help update
+    def help_update(self):
+        print("Updates an instance based on the class name and id by adding "
+              "or updating attribute\n")
 
 
 if __name__ == '__main__':
