@@ -1,5 +1,9 @@
+#!/usr/bin/env python
+"""This module defines the HBNBCommand class"""
+
 import cmd
 import re
+import sys
 from models.base_model import BaseModel
 from models.user import User
 from models.amenity import Amenity
@@ -12,7 +16,22 @@ from models.__init__ import storage
 
 class HBNBCommand(cmd.Cmd):
     """Class for the command interpreter"""
-    prompt = '(hbnb) '
+    
+    # determine prompt for interactive and non-interactive mode
+    prompt = "(hbnb) " if sys.__stdin__.isatty() else ""
+    
+    # preloop for non-interactive mode
+    def preloop(self):
+        """Prints if isatty is false"""
+        if not sys.__stdin__.isatty():
+            print('(hbnb) ')
+            
+    # postcmd for non-interactive mode
+    def postcmd(self, stop, line):
+        """Prints if isatty is false"""
+        if not sys.__stdin__.isatty():
+            print('(hbnb) ')
+        return stop
 
     def do_quit(self, arg):
         """Quit command to exit the program\n"""
