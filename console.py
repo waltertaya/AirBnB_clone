@@ -184,7 +184,8 @@ class HBNBCommand(cmd.Cmd):
                 match = re.search(r'\((.*?)\)', args[1])
                 if match:
                     instance_id = match.group(1).strip('\'"')
-                    if args[0] not in ["BaseModel", "User", "Amenity", "City", "Place", "Review", "State"]:
+                    if args[0] not in ["BaseModel", "User", "Amenity",
+                                       "City", "Place", "Review", "State"]:
                         print("** class doesn't exist **")
                     else:
                         self.do_show(args[0] + " " + instance_id)
@@ -195,7 +196,8 @@ class HBNBCommand(cmd.Cmd):
                 match = re.search(r'\((.*?)\)', args[1])
                 if match:
                     instance_id = match.group(1).strip('\'"')
-                    if args[0] not in ["BaseModel", "User", "Amenity", "City", "Place", "Review", "State"]:
+                    if args[0] not in ["BaseModel", "User", "Amenity", "City",
+                                       "Place", "Review", "State"]:
                         print("** class doesn't exist **")
                     else:
                         self.do_destroy(args[0] + " " + instance_id)
@@ -214,18 +216,20 @@ class HBNBCommand(cmd.Cmd):
 
                     for item in data:
                         if isinstance(item, str):
-                            cleaned_item = re.sub(r'[^a-zA-Z0-9\s@_-]', '', item)
+                            cleaned_item = re.sub(r'[^a-zA-Z0-9\s@_-]',
+                                                  '', item)
                             cleaned_data.append(cleaned_item)
                         else:
                             cleaned_data.append(item)
-                    
+
                     my_list = cleaned_data[0].split(" ")
                     instance_id = my_list.pop(0)
                     my_dict = {}
                     for i in range(0, len(my_list), 2):
                         my_dict[my_list[i]] = my_list[i + 1]
                     for k, v in my_dict.items():
-                        self.do_update(args[0] + " " + instance_id + " " + k + " " + v)
+                        self.do_update(args[0] + " " +
+                                       instance_id + " " + k + " " + v)
 
                 else:
                     new_instance = re.search(r'\((.*?)\)', args[1]).group(1)
@@ -238,7 +242,8 @@ class HBNBCommand(cmd.Cmd):
 
                     for item in data:
                         if isinstance(item, str):
-                            cleaned_item = re.sub(r'[^a-zA-Z0-9\s@_-]', '', item)
+                            cleaned_item = re.sub(r'[^a-zA-Z0-9\s@_-]',
+                                                  '', item)
                             cleaned_data.append(cleaned_item)
                         else:
                             cleaned_data.append(item)
@@ -246,6 +251,7 @@ class HBNBCommand(cmd.Cmd):
                     self.do_update(args[0] + " " + cleaned_data[0])
         else:
             print("*** Unknown syntax:", arg)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
