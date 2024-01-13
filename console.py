@@ -1,6 +1,12 @@
 import cmd
 import re
 from models.base_model import BaseModel
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
 from models.__init__ import storage
 
 
@@ -31,13 +37,20 @@ class HBNBCommand(cmd.Cmd):
         print("Empty line + ENTER shouldn’t execute anything\n")
 
     def do_create(self, arg):
-        """Creates a new instance of BaseModel, saves it (to the JSON file)
+        """Creates a new instance of a class, saves it (to the JSON file)
         and prints the id"""
         if not arg:
             print("** class name missing **")
+        elif arg not in ["BaseModel", "User",
+                         "Amenity", "City", "Place", "Review", "State"]:
+            print("** class doesn't exist **")
         else:
+            my_classes = {"BaseModel": BaseModel, "User": User,
+                            "Amenity": Amenity, "City": City,
+                            "Place": Place, "Review": Review,
+                            "State": State}
             try:
-                new_instance = arg()
+                new_instance = my_classes[arg]()
                 storage.save()
                 print(new_instance.id)
             except NameError:
@@ -45,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
 
     # help create
     def help_create(self):
-        print("Creates a new instance of BaseModel, saves it (to the JSON "
+        print("Creates a new instance of a class, saves it (to the JSON "
               "file) and prints the id\n")
 
     def do_show(self, arg):
