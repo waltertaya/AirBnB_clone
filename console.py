@@ -214,7 +214,7 @@ class HBNBCommand(cmd.Cmd):
 
                     for item in data:
                         if isinstance(item, str):
-                            cleaned_item = re.sub(r'[^a-zA-Z0-9\s]', '', item)
+                            cleaned_item = re.sub(r'[^a-zA-Z0-9\s@_-]', '', item)
                             cleaned_data.append(cleaned_item)
                         else:
                             cleaned_data.append(item)
@@ -238,12 +238,11 @@ class HBNBCommand(cmd.Cmd):
 
                     for item in data:
                         if isinstance(item, str):
-                            cleaned_item = re.sub(r'[^a-zA-Z0-9\s]', '', item)
+                            cleaned_item = re.sub(r'[^a-zA-Z0-9\s@_-]', '', item)
                             cleaned_data.append(cleaned_item)
                         else:
                             cleaned_data.append(item)
 
-                    print(args[0] + " " + cleaned_data[0])
                     self.do_update(args[0] + " " + cleaned_data[0])
         else:
             print("*** Unknown syntax:", arg)
