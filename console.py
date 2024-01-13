@@ -16,16 +16,16 @@ from models.__init__ import storage
 
 class HBNBCommand(cmd.Cmd):
     """Class for the command interpreter"""
-    
+
     # determine prompt for interactive and non-interactive mode
     prompt = "(hbnb) " if sys.__stdin__.isatty() else ""
-    
+
     # preloop for non-interactive mode
     def preloop(self):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
             print('(hbnb) ')
-            
+
     # postcmd for non-interactive mode
     def postcmd(self, stop, line):
         """Prints if isatty is false"""
@@ -65,9 +65,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             my_classes = {"BaseModel": BaseModel, "User": User,
-                            "Amenity": Amenity, "City": City,
-                            "Place": Place, "Review": Review,
-                            "State": State}
+                          "Amenity": Amenity, "City": City,
+                          "Place": Place, "Review": Review, "State": State}
             try:
                 new_instance = my_classes[arg]()
                 storage.save()
