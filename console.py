@@ -171,7 +171,16 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
         else:
-            args = arg.split()
+            arg_s = arg.split()
+            args = []
+            for item in arg_s:
+                if isinstance(item, str):
+                    cleaned_item = re.sub(r'[^a-zA-Z0-9\s@_-]',
+                                            '', item)
+                    args.append(cleaned_item)
+                else:
+                    args.append(item)
+
             if args[0] not in ["BaseModel", "User",
                                "Amenity", "City", "Place", "Review", "State"]:
                 print("** class doesn't exist **")
