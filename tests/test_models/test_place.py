@@ -12,8 +12,7 @@ class TestPlace(TestBaseModel):
         super().__init__(*args, **kwargs)
         self.name = "Place"
         self.value = Place
-        
-    
+
     def test_amenity_ids(self):
         """ """
         new = self.value()
