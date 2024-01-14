@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+""""Review class inheriting from BaseModel class"""
 from models.base_model import BaseModel
 
 

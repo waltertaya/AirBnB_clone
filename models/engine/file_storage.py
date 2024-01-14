@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+""""Module to manage file storage for hbnb clone """
 import json
 
 
