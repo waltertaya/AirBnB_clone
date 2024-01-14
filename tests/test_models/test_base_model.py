@@ -30,7 +30,7 @@ class TestBaseModel(unittest.TestCase):
     def tearDown(self):
         try:
             os.remove('file.json')
-        except:
+        except FileNotFoundError:
             pass
 
     def test_default(self):
@@ -90,7 +90,6 @@ class TestBaseModel(unittest.TestCase):
         """ """
         new = self.value()
         self.assertEqual(type(new.id), str)
-
 
     def test_updated_at(self):
         """ """
