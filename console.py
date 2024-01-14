@@ -52,8 +52,8 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     # help emptyline
-    def help_emptyline(self):
-        print("Empty line + ENTER shouldn’t execute anything\n")
+    # def help_emptyline(self):
+    #     print("Empty line + ENTER shouldn’t execute anything\n")
 
     def do_create(self, arg):
         """Creates a new instance of a class, saves it (to the JSON file)
