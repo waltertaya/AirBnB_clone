@@ -175,8 +175,7 @@ class HBNBCommand(cmd.Cmd):
             args = []
             for item in arg_s:
                 if isinstance(item, str):
-                    cleaned_item = re.sub(r'[^a-zA-Z0-9\s@_-]',
-                                            '', item)
+                    cleaned_item = re.sub(r'[^a-zA-Z0-9\s@_-]', '', item)
                     args.append(cleaned_item)
                 else:
                     args.append(item)
