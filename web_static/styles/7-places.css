@@ -1,6 +1,7 @@
 .places {
     margin: 45px auto;
     display: block;
+    text-align: center;
 }
 .places h1 {
     font-size: 1.875rem;
@@ -9,6 +10,7 @@
     float: left;
     display: block;
     width: 90%;
+    text-align: left;
 }
 .places article {
     display: inline-block;
