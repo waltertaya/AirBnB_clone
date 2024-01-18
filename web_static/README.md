@@ -73,7 +73,3 @@ After completing this project, you should be able to explain:
 ## Copyright
 
 Copyright © 2024 ALX, All rights reserved.
-
----
-
-*Note: Ensure that you update the README.md file as you progress through each task, providing details specific to each task's requirements and specifications.*
