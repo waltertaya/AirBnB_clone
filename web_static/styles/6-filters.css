@@ -4,6 +4,7 @@
     width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
+    display: block;
 }
 .filters button {
     font-size: 18px;
@@ -29,35 +30,35 @@
 	vertical-align: middle;
     /* margin-left: 45px; */
 }
-.amenities {
+.filters .amenities {
     height: 100%;
     width: 25%;
     display: inline-block;
 	vertical-align: middle;
-    /* margin-left: 45px; */
 }
 .locations h3, .amenities h3 {
     padding-left: 45px;
     font-weight: 600;
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .locations p, .amenities p {
     padding-left: 45px;
     font-weight: 400;
     font-size: 14px;
-    margin-top: 5px;
-    margin-bottom: 12px;
+    /* margin-top: 5px; */
+    margin-bottom: 6px;
 }
 .popover {
     display: none;
     background-color: #FAFAFA;
     width: 100%;
     border: #DDDDDD 1px solid;
-    border-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
     list-style-type: none;
-    margin-left: -1px;
-    margin-top: 8px;
+    margin-top: 0px;
+    margin-left: -2.5px;
     padding: 0px;
 }
 ul {
@@ -67,12 +68,14 @@ ul {
 }
 .amenities h4 {
     padding-left: 25px;
+    margin-bottom: 12px;
 }
 .locations h2 {
     padding-left: 20px;
 }
 .locations h4 {
     padding-left: 30px;
+    margin-bottom: 12px;
 }
 .locations:hover .popover, .amenities:hover .popover {
     display: inline-block;
