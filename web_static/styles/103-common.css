@@ -5,7 +5,18 @@ body {
     font-size: 14px;
     font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+main {
+	flex-grow: 1;
+	flex-shrink: 0;
+}
 .container {
     max-width: 1000px;
     margin: 30px auto;
+}
+@media screen and (min-width: 1800px) {
+
+	div.container {
+		max-width: 80%;
+	}
+
 }
